@@ -38,7 +38,7 @@
             toggle the value to true to get it to show up again.
           </p>
           <!-- add code to element below -->
-          <div class="player-card text-center">
+          <div class="player-card text-center" v-if="state.showPlayer">
             <div>
               <img :src="state.player.photo" />
             </div>
@@ -68,22 +68,22 @@
           </p>
           <!-- v-if comparing grade and 90 -->
           <div>
-            <p>The grade is 'A'.</p>
+            <p v-if="state.grade >= 90">The grade is 'A'.</p>
           </div>
           <!-- v-else-if comparing grade and 80 -->
-          <div>
+          <div v-if="state.grade >= 80">
             <p>The grade is 'B'.</p>
           </div>
           <!-- v-else-if comparing grade and 70 -->
-          <div>
+          <div v-if="state.grade >= 70">
             <p>The grade is 'C'.</p>
           </div>
           <!-- v-else-if comparing grade and 60 -->
-          <div>
+          <div v-if="state.grade >= 60">
             <p>The grade is 'D'.</p>
           </div>
           <!-- v-else to display if all the others fail -->
-          <div>
+          <div v-if="state.grade >= 50">
             <p>The grade is 'F'.</p>
           </div>
         </div>
@@ -93,7 +93,7 @@
             Change the v-if directive to a v-show on the "player-card" element
             below.
           </p>
-          <div class="player-card text-center area" v-show="state.player.id">
+          <div class="player-card text-center area" v-show="state.player.number">
             <div>
               <img :src="state.player.photo" />
             </div>
@@ -129,6 +129,8 @@ export default {
   setup() {
     // NOTE typically state will be abstracted to a global AppState
     const state = reactive({
+      showPlayer: true,
+      grade: 50,
       //add a property to toggle the player-card here.
       //add a property to set the number value here.
       player: {
